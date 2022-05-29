@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="index.css" />
+    <title>Wetwork Traffic</title>
+    <div class="fire"></div>
+  </head>
+  <body>
+    <div style="position: relative; padding: 10px; width: inherit">
+      <h1 style="text-align: center">Wetwork Traffic</h1>
+      <button
+        class="button btn btn-modal dark resetButton"
+        id="instructionToggle"
+        data-id="slide-bottom-modal"
+      >
+        ?
+      </button>
+    </div>
+
+    <main id="main">
+      <div id="inventory1"></div>
+      <div class="container"></div>
+      <div id="inventory2"></div>
+    </main>
+    <div class="buttonContainer">
+      <button onclick="reset()" class="button resetButton">Reset</button>
+      <button
+        onclick="submitSolution()"
+        class="button submitButton"
+        role="button"
+      >
+        Submit
+      </button>
+    </div>
+
+    <div
+      class="modal instruction-modal"
+      id="instruction-modal"
+      id="slide-bottom-modal"
+    >
+      <div class="m-container slide-from-bottom">
+        <h2 class="m-title">INSTRUCTIONS</h2>
+        <p class="m-close close-instruction-modal"></p>
+        <div class="m-content">
+          <h3 style="margin-bottom: 10px">
+            Oh no! Fires are blazing, and its up to you to put out the flames!
+          </h3>
+          <p>1. Drag your firefighting equipment into the grid</p>
+          <p>2. Click the items that you dragged in the grid to rotate them</p>
+          <p>
+            3. Drag items out of the grid to put them back in your inventory
+          </p>
+          <p>
+            4. Direct the water from the fire hydrant through the firetruck and
+            into the monitors to put out all the fires
+          </p>
+          <h3 style="margin-top: 10px">All the best!</h3>
+          <h4 style="margin-top: 10px">
+            Protip: Use the 'R' key to reset the board easily
+          </h4>
+          <p style="margin-top: 10px">
+            Note: Meant for Devices / Windows that can fit the entire grid onto
+            the screen.
+          </p>
+
+          <div class="m-footer">
+            <button class="button resetButton close-instruction-modal">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="result-modal">
+      <div class="m-container slide-from-bottom">
+        <h2 class="m-title" id="result-status">PLACEHOLDER STATUS</h2>
+        <p class="m-close close-result-modal"></p>
+        <div class="m-content">
+          <h3 style="margin-bottom: 10px" id="result-message">
+            PLACEHOLDER MESSAGE
+          </h3>
+          <div class="m-footer">
+            <button class="button resetButton close-result-modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
