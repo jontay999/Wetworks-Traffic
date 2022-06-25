@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        text-decoration: none;
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", "sans-serif";
+        box-sizing: border-box;
+      }
+
+      .buttonContainer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        margin-top: 20px;
+      }
+
+      /* CSS */
+      .button {
+        border: 0;
+        border-radius: 12px;
+        color: #ffffff;
+        cursor: pointer;
+        display: inline-block;
+        font-family: "Poppins";
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 2.5;
+        outline: transparent;
+        padding: 0px 30px;
+        text-align: center;
+        text-decoration: none;
+        transition: box-shadow 0.2s ease-in-out;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        white-space: nowrap;
+        transition: all 200ms ease-in;
+        text-transform: uppercase;
+        letter-spacing: 0.15rem;
+      }
+      .resetButton {
+        margin-right: 15px;
+        background: linear-gradient(
+          to right,
+          #0f2027,
+          #2c5364
+        ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      }
+
+      .resetButton:not([disabled]):hover {
+        transform: scale(1.02);
+        box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
+          -0.125rem -0.125rem 1rem rgba(15, 32, 39, 0.5),
+          0.125rem 0.125rem 1rem rgba(44, 83, 68, 0.5);
+      }
+
+      .modal {
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        bottom: 0;
+        top: 0;
+        right: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        background-color: rgba(0, 0, 0, 0.3);
+        padding: 20px;
+        visibility: hidden;
+        opacity: 0;
+        transition: all 0.3s ease-in-out;
+      }
+      .modal .m-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 500px;
+        min-height: 150px;
+        height: auto;
+        margin: 0 auto;
+        position: relative;
+        border-radius: 5px;
+        margin-top: 120px;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15),
+          0 10px 10px -5px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        transition: all 0.3s ease-in-out;
+      }
+      .modal .m-container.sm-modal {
+        max-width: 300px;
+      }
+      .modal .m-container.l-modal {
+        max-width: 800px;
+      }
+      .modal .m-container.xl-modal {
+        max-width: 80%;
+      }
+      .modal .m-container.full-modal {
+        max-width: 100%;
+      }
+      .modal .m-container.bounce {
+        transform: scale(0.4);
+        transition: all 0.3s cubic-bezier(0.75, -0.5, 0, 2.75);
+      }
+      .modal .m-container.slide-from-top {
+        top: -200px;
+      }
+      .modal .m-container.slide-from-bottom {
+        bottom: -200px;
+      }
+      .modal .m-container.slide-from-left {
+        left: -200px;
+      }
+      .modal .m-container.slide-from-right {
+        right: -200px;
+      }
+      .modal .m-container .m-title {
+        background-color: #262626;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: auto;
+        width: 100%;
+        margin: 0;
+        padding: 10px 20px;
+        border-radius: 5px 5px 0 0;
+        color: #f2f2f2;
+        font-weight: 500;
+        /* font-size: 18px; */
+        flex-wrap: wrap;
+      }
+      .modal .m-container .m-close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        height: 25px;
+        width: 25px;
+        right: -7px;
+        top: -7px;
+        padding: 0;
+        margin: 0;
+        background-color: #f2f2f2;
+        border-radius: 50%;
+        transform: rotate(45deg);
+        cursor: pointer;
+        transition: all 100ms ease-in;
+        box-shadow: 0 5px 10px -5px rgba(0, 0, 0, 0.15),
+          0 10px 10px -5px rgba(0, 0, 0, 0.1);
+      }
+
+      .m-close:hover {
+        transform: rotate(45deg) scale(1.2) !important;
+      }
+
+      .modal .m-container .m-close:after,
+      .modal .m-container .m-close:before {
+        content: "";
+        display: block;
+        position: absolute;
+        background-color: #262626;
+        border-radius: 3px;
+      }
+      .modal .m-container .m-close:after {
+        width: 2px;
+        height: 16px;
+      }
+      .modal .m-container .m-close:before {
+        width: 16px;
+        height: 2px;
+      }
+      .modal .m-container .m-content {
+        display: block;
+        background-color: #fff;
+        min-height: 150px;
+        width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 20px;
+        border-radius: 0 0 5px 5px;
+      }
+      .modal .m-container .m-content .m-footer {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-top: 10px;
+        flex-wrap: wrap;
+      }
+      .modal.active {
+        visibility: visible;
+        opacity: 1;
+      }
+      .modal.active .m-container {
+        opacity: 1;
+      }
+      .modal.active .m-container.bounce {
+        transform: scale(1);
+      }
+      .modal.active .m-container.slide-from-top {
+        top: 0px;
+      }
+      .modal.active .m-container.slide-from-bottom {
+        bottom: 0px;
+      }
+      .modal.active .m-container.slide-from-left {
+        left: 0px;
+      }
+      .modal.active .m-container.slide-from-right {
+        right: 0px;
+      }
+
+      #instructionToggle {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      const htmlToElement = (html) => {
+        var template = document.createElement("template");
+        html = html.trim(); // Never return a text node of whitespace as the result
+        template.innerHTML = html;
+        return template.content.firstChild;
+      };
+      const instructionModalString = `<h3 style="margin-bottom: 10px">
+Oh no! Fires are blazing, and its up to you to put out the flames!
+</h3>
+<p>1. Drag your firefighting equipment into the grid</p>
+<p>2. Click the items that you dragged in the grid to rotate them</p>
+<p>
+3. Drag items out of the grid to put them back in your inventory
+</p>
+<p>
+4. Direct the water from the fire hydrant through the firetruck and
+into the monitors to put out all the fires
+</p>
+<h3 style="margin-top: 10px">All the best!</h3>
+<h4 style="margin-top: 10px">
+Protip: Use the 'R' key to reset the board easily
+</h4>
+<p style="margin-top: 10px">
+Note: Meant for Devices / Windows that can fit the entire grid onto
+the screen.
+</p>`;
+      function genModal(id, title, bodyHtmlString) {
+        let html = "";
+        html += `
+    <div class="modal ${id}" id="${id}">
+        <div class="m-container slide-from-bottom">
+        <h2 class="m-title">${title}</h2>
+        <p class="m-close close-${id}"></p>
+        <div class="m-content">
+            ${bodyHtmlString}
+            <div class="m-footer">
+            <button class="button resetButton close-${id}">
+                Close
+            </button>
+            </div>
+        </div>
+        </div>
+    </div>
+    `;
+        const modalElem = htmlToElement(html);
+        document
+          .querySelector("body")
+          .insertAdjacentElement("afterbegin", modalElem);
+        document.addEventListener("click", function (e) {
+          if (!e.target.matches(".modal")) return;
+          modalElem.classList.remove("active");
+        });
+        document.querySelectorAll(`.close-${id}`).forEach((i) =>
+          i.addEventListener("click", () => {
+            document.querySelector(`#${id}`).classList.remove("active");
+          })
+        );
+        return modalElem;
+      }
+
+      const modalElem = genModal(
+        "instruction-modal",
+        "INSTRUCTIONS",
+        instructionModalString
+      );
+      setTimeout(() => modalElem.classList.add("active"), 400);
+    </script>
+  </body>
+</html>
