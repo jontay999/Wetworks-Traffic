@@ -1,0 +1,13 @@
+# Wetworks-Traffic
+
+- Go http server using gin gonic
+- Vanilla Javascript with drag and drop api
+- Dockerfile to run on alpine and compile down to binary
+
+
+## To host it locally
+```
+docker build -t wetworks .
+docker run --rm -p 3000:3000 wetworks
+```
+And connect to `localhost:3000`
