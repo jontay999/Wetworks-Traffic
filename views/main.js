@@ -1362,6 +1362,7 @@ const submitSolution = async () => {
     const arr = encodeGrid()
     let data = { grid: arr, time: Math.floor(new Date().getTime() / 1000) }
     console.log("sending:", data)
+    // change url depending on what server you are using, if its python, just POST to the root '/'
     let result = await fetch('/submit', {
         method: 'POST',
         headers: {
@@ -1388,3 +1389,28 @@ const submitSolution = async () => {
 }
 
 
+
+const pythonServer = async () => {
+    const arr = [['0', '0', '0', '0', '0', '0', '0', '📦', '📦', '📦', '0', '0'],
+    ['0', '0', 'RB', 'LB', '🚒', 'RB', '🚰r', '📦', '🔥', '📦', '0', '0'],
+    ['0', '0', '3▮', 'RT', '🚒', 'LT', '0', '📦', '📦', '📦', '0', '0'],
+    ['0', '0', '3▮', 'RB', '🚒', 'LB', '0', '0', '0', '0', '0', '0'],
+    ['0', '0', '3▮', '3▮', '0', 'RT', 'LB', '0', '📦', '📦', '📦', '0'],
+    ['0', '0', '3▮', '3▮', '0', '0', 'RT', '🚰r', '📦', '🔥', '📦', '0'],
+    ['0', '0', '3▮', '3▮', '0', '0', '0', '0', '📦', '📦', '📦', '0'],
+    ['0', '0', '3▮', 'RT', '3▬', '3▬', '3▬', 'LB', '0', '0', '0', '0'],
+    ['0', '0', 'RT', '3▬', '3▬', '3▬', '🧯', 'LT', '0', '0', '0', '0'],
+]
+    let data = { grid: arr, time: Math.floor(new Date().getTime() / 1000) }
+    console.log("sending:", data)
+    let result = await fetch('http://127.0.0.1:5000/', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    res = await  result.json()
+    console.log(res)
+}
